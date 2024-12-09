@@ -5,7 +5,7 @@
 #include <QPen>
 #include <QColor>
 
-#define CIRCLE_RADIUS 5
+#define CIRCLE_RADIUS 6
 /**
  * @brief Класс для создания точки на графике
  * Объект хранит координаты на сцене x и y
@@ -13,8 +13,10 @@
  */
 class GraphicPoint : public QGraphicsEllipseItem {
     private:
-        int x;
-        int y;
+        double x;
+        double y;
+        bool movable;
+        double value;
     public:
         /**
          * @brief Конструктор
@@ -24,19 +26,31 @@ class GraphicPoint : public QGraphicsEllipseItem {
          * @pre Оба параметра должны быть ицинициализированы и находится в границах
          * координат сцены (пока дефайнами задано от 0 до 1920 в ширину и от 0 до 1080 в высоту)
          */
-        GraphicPoint(int x, int y);
+        GraphicPoint(double x, double y);
 
         /**
          * @brief Метод для получения x координаты
-         * @return Целое значение координаты x
+         * @return Double значение координаты x
          */
-        int getX();
+        double getX();
 
         /**
          * @brief Метод для получение y координаты
-         * @return Целое значение координаты y
+         * @return Double значение координаты y
          */
-        int getY();
+        double getY();
+
+        /**
+         * @brief Геттер movable
+         * @return Булево значение переменной movable
+         */
+        bool isMovable();
+
+        /**
+         * @brief Геттер для краевого условия первого рода
+         * @return Double значение краевого условия
+         */
+        double getValue();
 };
 
 #endif // GRAPHIC_POINT_H

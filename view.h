@@ -30,6 +30,9 @@ class View : public QGraphicsView {
          */
         bool approximateHit(GraphicPoint *start, GraphicPoint *end);
 
+        void leftMouseButtonPressed(QMouseEvent *event);
+        void rightMouseButtonPressed(QMouseEvent *event);
+
     public:
         /**
          * @brief Конструктор

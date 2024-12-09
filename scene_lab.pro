@@ -12,17 +12,20 @@ SOURCES += \
     graphic_point.cpp \
     main.cpp \
     mainwindow.cpp \
+    pointconfig.cpp \
     scene.cpp \
     view.cpp
 
 HEADERS += \
     graphic_point.h \
     mainwindow.h \
+    pointconfig.h \
     scene.h \
     view.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    pointconfig.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

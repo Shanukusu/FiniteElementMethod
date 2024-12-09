@@ -53,7 +53,10 @@ void Scene::finishFigure()
 
     int x2 = lastFigure.last()->getX();
     int y2 = lastFigure.last()->getY();
-    QGraphicsLineItem *line = new QGraphicsLineItem(x1, y1, x2, y2);
+    QGraphicsLineItem *line = new QGraphicsLineItem(x1 + CIRCLE_RADIUS / 2,
+                                                    y1 + CIRCLE_RADIUS / 2,
+                                                    x2 + CIRCLE_RADIUS / 2,
+                                                    y2 + CIRCLE_RADIUS / 2);
     line->setPen(* new QPen(* new QColor("white")));
     this->addItem(line);
 }
