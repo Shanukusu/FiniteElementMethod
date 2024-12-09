@@ -16,9 +16,9 @@ void View::mousePressEvent(QMouseEvent *event)
             if (!this->isFigureDrawing()) {
                 Scene *scene = (Scene *)this->scene();
 
-                QPointF coord = this->mapToScene( event->position().x(), event->position().y() );
+                QPointF coord = this->mapToScene( event->x(), event->y() );
 
-                Point *point = new Point( (int)coord.x(), (int)coord.y() );
+                GraphicPoint *point = new GraphicPoint( (int)coord.x(), (int)coord.y() );
                 scene->addFigure();
                 scene->addPoint(point);
                 scene->addItem(point);
@@ -30,10 +30,10 @@ void View::mousePressEvent(QMouseEvent *event)
             else {
                 Scene *scene = (Scene *)this->scene();
 
-                QPointF coord = this->mapToScene( event->position().x(), event->position().y() );
+                QPointF coord = this->mapToScene( event->x(), event->y() );
 
-                Point *point = new Point( (int)coord.x(), (int)coord.y() );
-                QList<Point *> lastFigure = scene->getPoints().last();
+                GraphicPoint *point = new GraphicPoint( (int)coord.x(), (int)coord.y() );
+                QList<GraphicPoint *> lastFigure = scene->getPoints().last();
 
                 if ( this->approximateHit(lastFigure.first(), point) ) {
                     this->figureIsDrawing = false;
@@ -73,7 +73,7 @@ void View::mousePressEvent(QMouseEvent *event)
     }
 }
 
-bool View::approximateHit(Point *start, Point *end)
+bool View::approximateHit(GraphicPoint *start, GraphicPoint *end)
 {
     if ( end->getX() > start->getX() - HIT_RADIUS / 2 &&
          end->getX() < start->getX() + HIT_RADIUS / 2 &&

@@ -3,7 +3,7 @@
 
 #include <QGraphicsView>
 #include <QMouseEvent>
-#include <point.h>
+#include <graphic_point.h>
 #include <scene.h>
 
 #define HIT_RADIUS 50
@@ -28,7 +28,7 @@ class View : public QGraphicsView {
          *
          * @return True, если пользователь почти попал в точку, false - если он был совсем далёк
          */
-        bool approximateHit(Point *start, Point *end);
+        bool approximateHit(GraphicPoint *start, GraphicPoint *end);
 
     public:
         /**

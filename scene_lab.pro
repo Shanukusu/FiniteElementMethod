@@ -9,15 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    graphic_point.cpp \
     main.cpp \
     mainwindow.cpp \
-    point.cpp \
     scene.cpp \
     view.cpp
 
 HEADERS += \
+    graphic_point.h \
     mainwindow.h \
-    point.h \
     scene.h \
     view.h
 

@@ -1,5 +1,5 @@
-#ifndef POINT_H
-#define POINT_H
+#ifndef GRAPHIC_POINT_H
+#define GRAPHIC_POINT_H
 
 #include <QGraphicsEllipseItem>
 #include <QPen>
@@ -13,7 +13,7 @@
  *
  * TODO сделать возможность настроки цвета объекта
  */
-class Point : public QGraphicsEllipseItem {
+class GraphicPoint : public QGraphicsEllipseItem {
     private:
         int x;
         int y;
@@ -26,7 +26,7 @@ class Point : public QGraphicsEllipseItem {
          * @pre Оба параметра должны быть ицинициализированы и находится в границах
          * координат сцены (пока дефайнами задано от 0 до 1920 в ширину и от 0 до 1080 в высоту)
          */
-        Point(int x, int y);
+        GraphicPoint(int x, int y);
 
         /**
          * @brief Метод для получения x координаты
@@ -41,4 +41,4 @@ class Point : public QGraphicsEllipseItem {
         int getY();
 };
 
-#endif // POINT_H
+#endif // GRAPHIC_POINT_H
