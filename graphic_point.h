@@ -8,9 +8,7 @@
 #define CIRCLE_RADIUS 5
 /**
  * @brief Класс для создания точки на графике
- *
  * Объект хранит координаты на сцене x и y
- *
  * TODO сделать возможность настроки цвета объекта
  */
 class GraphicPoint : public QGraphicsEllipseItem {

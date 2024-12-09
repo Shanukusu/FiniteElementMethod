@@ -21,7 +21,6 @@ void View::mousePressEvent(QMouseEvent *event)
                 GraphicPoint *point = new GraphicPoint( (int)coord.x(), (int)coord.y() );
                 scene->addFigure();
                 scene->addPoint(point);
-                scene->addItem(point);
                 this->figureIsDrawing = true;
             }
 
@@ -64,7 +63,6 @@ void View::mousePressEvent(QMouseEvent *event)
                 }
                 else {
                     scene->addPoint(point);
-                    scene->addItem(point);
                 }
             }
         }

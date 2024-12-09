@@ -15,6 +15,7 @@ QList<QList<GraphicPoint *>> Scene::getPoints()
 void Scene::addPoint(GraphicPoint *point)
 {
     this->points.last().append(point);
+    this->addItem(point);
 }
 
 void Scene::addFigure()
