@@ -4,18 +4,19 @@
 View::View(QWidget *parent): QGraphicsView(parent)
 {
     this->figureIsDrawing = false;
+    this->pointConfigCreated = false;
 }
 
 void View::leftMouseButtonPressed(QMouseEvent *event)
 {
     // Если мы только начинаем рисовать новую фигуру, то создаём для
     // свой список и запихиваем точку туда, рисуем точку на сцене
-    if (!this->isFigureDrawing()) {
+    if (!this->isFigureDrawing() && !this->isPointConfigCreated()) {
         Scene *scene = (Scene *)this->scene();
 
         QPointF coord = this->mapToScene( event->x(), event->y() );
 
-        GraphicPoint *point = new GraphicPoint( (int)coord.x(), (int)coord.y() );
+        GraphicPoint *point = new GraphicPoint(coord.x(), coord.y() );
         scene->addFigure();
         scene->addPoint(point);
         this->figureIsDrawing = true;
@@ -23,12 +24,12 @@ void View::leftMouseButtonPressed(QMouseEvent *event)
 
     // Если мы уже в процессе рисования фигуры, то следим, чтобы пользователь
     // "почти попал" в начальную точку и тогда завершаем фигуру
-    else {
+    else if (!this->isPointConfigCreated()) {
         Scene *scene = (Scene *)this->scene();
 
         QPointF coord = this->mapToScene( event->x(), event->y() );
 
-        GraphicPoint *point = new GraphicPoint( (int)coord.x(), (int)coord.y() );
+        GraphicPoint *point = new GraphicPoint( coord.x(), coord.y() );
         QList<GraphicPoint *> lastFigure = scene->getPoints().last();
 
         if ( this->approximateHit(lastFigure.first(), point) ) {
@@ -38,8 +39,8 @@ void View::leftMouseButtonPressed(QMouseEvent *event)
                 int x1 = lastFigure[i]->getX();
                 int y1 = lastFigure[i]->getY();
 
-                int x2 = lastFigure[i+1]->getX();
-                int y2 = lastFigure[i+1]->getY();
+                int x2 = lastFigure[i + 1]->getX();
+                int y2 = lastFigure[i + 1]->getY();
 
                 QGraphicsLineItem *line = new QGraphicsLineItem(x1 + CIRCLE_RADIUS / 2,
                                                                 y1 + CIRCLE_RADIUS / 2,
@@ -60,7 +61,35 @@ void View::leftMouseButtonPressed(QMouseEvent *event)
 
 void View::rightMouseButtonPressed(QMouseEvent *event)
 {
+    QPointF coord = this->mapToScene( event->x(), event->y() );
+    QList<QGraphicsItem *> clickedItems = this->items(coord.x(),
+                                                      coord.y(),
+                                                      CIRCLE_RADIUS * 2,
+                                                      CIRCLE_RADIUS * 2);
+    if (!clickedItems.isEmpty()) {
 
+        Scene *scene = static_cast<Scene *>(this->scene());
+
+        for (int i = 0; i < clickedItems.size(); i++) {
+
+            GraphicPoint *point = static_cast<GraphicPoint *>(clickedItems[i]);
+
+            if (point != nullptr) {
+
+                this->pointConfigCreated = true;
+                PointConfig *pointConfig = new PointConfig(point);
+                connect(pointConfig, &PointConfig::closed,
+                        this, &View::pointConfigWasClosed);
+
+
+                QGraphicsProxyWidget *pointEditWidget = scene->addWidget(pointConfig);
+                pointEditWidget->setPos(coord);
+                pointEditWidget->setZValue(1);
+
+                this->denormalizeCoordinate(coord);
+            }
+        }
+    }
 }
 
 void View::mousePressEvent(QMouseEvent *event)
@@ -90,4 +119,16 @@ bool View::approximateHit(GraphicPoint *start, GraphicPoint *end)
 bool View::isFigureDrawing()
 {
     return this->figureIsDrawing;
+}
+
+
+QPointF View::denormalizeCoordinate(QPointF point)
+{
+    QPointF new_point = this->mapFromScene(point);
+    qDebug() << new_point;
+}
+
+void View::pointConfigWasClosed()
+{
+    this->pointConfigCreated = false;
 }

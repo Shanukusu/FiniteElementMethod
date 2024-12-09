@@ -16,6 +16,13 @@ public:
     explicit PointConfig(GraphicPoint* point, QWidget *parent = nullptr);
     ~PointConfig();
 
+signals:
+    void closed();
+
+public slots:
+    void okButtonClicked();
+    void cancelButtonClicked();
+
 private:
     Ui::PointConfig *ui;
     GraphicPoint *point;

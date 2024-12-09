@@ -60,3 +60,4 @@ void Scene::finishFigure()
     line->setPen(* new QPen(* new QColor("white")));
     this->addItem(line);
 }
+

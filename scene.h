@@ -65,6 +65,7 @@ class Scene : public QGraphicsScene {
          * Соединяет первую и последние точки, образуя замкнутую фигуру
          */
         void finishFigure();
+
 };
 
 #endif // SCENE_H
