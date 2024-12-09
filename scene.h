@@ -5,6 +5,8 @@
 #include <QList>
 #include <QGraphicsLineItem>
 #include <graphic_point.h>
+#include <QPen>
+#include <QColor>
 #include <QObject>
 
 
@@ -56,6 +58,13 @@ class Scene : public QGraphicsScene {
          * Что в смысловой нагрузке и означает "Добавить фигуру"
          */
         void addFigure();
+
+        /**
+         * @brief Действия для завершения фигуры при "тыке" пользователя в начальную точку
+         * Красит первую точку в дефолтный цвет (сейчас фиксировано красный)
+         * Соединяет первую и последние точки, образуя замкнутую фигуру
+         */
+        void finishFigure();
 };
 
 #endif // SCENE_H

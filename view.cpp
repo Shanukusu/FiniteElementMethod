@@ -49,17 +49,8 @@ void View::mousePressEvent(QMouseEvent *event)
 
                         scene->addItem(line);
                     }
-
-                    // Создать линию между первым и последним узлом и сделать фигуру закрытой
-                    int x1 = lastFigure.first()->getX();
-                    int y1 = lastFigure.first()->getY();
-
-                    int x2 = lastFigure.last()->getX();
-                    int y2 = lastFigure.last()->getY();
-                    QGraphicsLineItem *line = new QGraphicsLineItem(x1, y1, x2, y2);
-                    line->setPen(* new QPen(* new QColor("white")));
-                    scene->addItem(line);
-
+                    // Завершить фигуру после "тыка" в первую точку
+                    scene->finishFigure();
                 }
                 else {
                     scene->addPoint(point);
