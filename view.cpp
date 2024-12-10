@@ -66,7 +66,7 @@ void View::rightMouseButtonPressed(QMouseEvent *event)
                                                       coord.y(),
                                                       CIRCLE_RADIUS * 2,
                                                       CIRCLE_RADIUS * 2);
-    if (!clickedItems.isEmpty()) {
+    if (!clickedItems.isEmpty() && !this->isPointConfigCreated()) {
 
         Scene *scene = static_cast<Scene *>(this->scene());
 
@@ -125,10 +125,16 @@ bool View::isFigureDrawing()
 QPointF View::denormalizeCoordinate(QPointF point)
 {
     QPointF new_point = this->mapFromScene(point);
+    return new_point;
     qDebug() << new_point;
 }
 
 void View::pointConfigWasClosed()
 {
     this->pointConfigCreated = false;
+}
+
+bool View::isPointConfigCreated()
+{
+    return this->pointConfigCreated;
 }
