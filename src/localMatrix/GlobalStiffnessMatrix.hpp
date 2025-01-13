@@ -41,12 +41,12 @@ void printTriangle(Triangle triangle)
 
 void example() {
     Point v1, v2, v3, v4, v5;
-
-    v1 = {4, 0.5, 0.5};
+    
+    v1 = {0,   0,   0};
     v2 = {1,   0,   1};
-    v3 = {0,   0,   0};
-    v4 = {2,   1,   1};
-    v5 = {3,   1,   0};
+    v3 = {2,   1,   1};
+    v4 = {3,   1,   0};
+    v5 = {4, 0.5, 0.5};
 
     Triangle triangle_1(v5, v2, v1);
     Triangle triangle_2(v5, v3, v2);
